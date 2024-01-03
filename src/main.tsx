@@ -10,6 +10,9 @@ import Root from './routes/root.tsx';
 import Products from './routes/products.tsx';
 import Details from './routes/details.tsx';
 import NotFound from './components/not-found.tsx';
+import { store } from './store.ts'
+import { Provider } from 'react-redux'
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,8 +34,10 @@ const router = createBrowserRouter([
 ]);
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>,
 )
