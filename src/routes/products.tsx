@@ -1,11 +1,9 @@
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card"
 import { Link } from "react-router-dom"
-import { Skeleton } from "@/components/ui/skeleton"
 import { useSelector } from "react-redux"
 
 
 export default function Products() {
-
     const products = useSelector((state: any) => state.product)
     return (
         <>

@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "@/components/ui/card";
 import {
     Dialog,
+    DialogClose,
     DialogContent,
     DialogDescription,
     DialogFooter,
@@ -11,13 +12,19 @@ import {
 } from "@/components/ui/dialog"
 import { useDispatch, useSelector } from "react-redux";
 import { useGetProductByIdQuery } from "@/services/product"
-import { Edit } from "lucide-react";
+import { Edit, Star, Trash2, Users } from "lucide-react";
 import React, { useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { editProduct, setProducts } from "@/features/product/productSlice";
 import { RootState } from "@/store";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+import EditDialog from "@/components/EditDialog";
 export default function Details() {
-    const inputRef = React.useRef<HTMLInputElement>(null)
+    const titleInputRef = React.useRef<HTMLInputElement>(null)
+    const priceInputRef = React.useRef<HTMLInputElement>(null)
+    const descriptionInputRef = React.useRef<HTMLInputElement>(null)
+    const categoryInputRef = React.useRef<HTMLInputElement>(null)
     const { id } = useParams()
     const dispatch = useDispatch()
     const parsedId = parseInt(id!)
@@ -43,44 +50,57 @@ export default function Details() {
     return (
         <>
             <div className="max-w-7xl mx-auto p-2">
-                <Card>
+                <Card className="max-w-4xl mx-auto">
                     <CardHeader>
-                        <div className="flex">
-
-                            <h1 className="text-3xl font-bold">{product?.title || data.title}</h1>
-                            <p className="text-2xl font-bold text-center ml-auto">
-                                {data.category}
-                            </p>
-                        </div>
+                        <h1 className="text-3xl font-bold text-center">{product?.title || data.title}</h1>
                     </CardHeader>
                     <CardContent className="">
                         <img className="mx-auto" src={data.image} alt={data.title} />
-                        <CardDescription className="grid">
+                        <CardDescription className="pt-6">
                             {data.description}
                         </CardDescription>
                     </CardContent>
-                    <CardFooter>
-                        <p className="text-2xl font-bold text-center">
-                            Price: {data.price}$
-                        </p>
+                    <CardFooter className="grid-cols-2">
+                        <div className="w-full flex flex-row items-center gap-4 h-4">
+                            <p className="font-bold">
+                                {data.category}
+                            </p>
+                            <Separator orientation="vertical" />
+                            <p>
+                                {data.price}$
+                            </p>
+                            <Separator orientation="vertical" />
+                            <p className="flex gap-2">
+                                {data.rating.rate} <Star size={24} />
+                            </p>
+                            <Separator orientation="vertical" />
+                            <p className="flex gap-2">
+                                {data.rating.count} <Users size={24} />
+                            </p>
+                            <Separator orientation="vertical" />
+                        </div>
+                        <EditDialog product={product} />
                         <Dialog>
-                            <DialogTrigger className="ml-auto">
-                                <Edit size={24} /> Edit
+                            <DialogTrigger className="flex gap-2 items-center ml-auto border-2 rounded-md p-2 bg-destructive hover:bg-foreground hover:text-destructive transition-color duration-75">
+                                <Trash2 size={24} /> Delete
                             </DialogTrigger>
                             <DialogContent>
                                 <DialogHeader>
-                                    <DialogTitle>Edit product</DialogTitle>
-                                    <DialogDescription>
-                                        <input type="text" ref={inputRef} />
-                                    </DialogDescription>
-                                    <DialogFooter>
-                                        <Button variant={'secondary'} onClick={() => {
-                                            dispatch(editProduct({ ...data, title: inputRef.current?.value! }))
-                                        }}>
-                                            Save
-                                        </Button>
-                                    </DialogFooter>
+                                    <DialogTitle>Are you sure ?</DialogTitle>
                                 </DialogHeader>
+                                <DialogDescription>
+                                    This action is irreversible!
+                                </DialogDescription>
+                                <DialogFooter>
+                                    <Button variant={'destructive'}>
+                                        Delete
+                                    </Button>
+                                    <DialogClose asChild>
+                                        <Button variant={'secondary'}>
+                                            Cancel
+                                        </Button>
+                                    </DialogClose>
+                                </DialogFooter>
                             </DialogContent>
                         </Dialog>
                     </CardFooter>

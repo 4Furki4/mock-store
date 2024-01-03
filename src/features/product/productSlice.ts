@@ -6,6 +6,10 @@ export type ProductState = {
     category: string,
     description: string,
     image: string
+    rating: {
+        rate: number,
+        count: number
+    }
 }
 const initialState: ProductState[] = []
 const productSlice = createSlice({
