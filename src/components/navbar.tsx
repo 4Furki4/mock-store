@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Button } from './ui/button'
 import React, { useRef } from 'react'
 import { Home } from 'lucide-react'
+import CreateDialog from './dialogs/CreateDialog'
 export default function Navbar() {
   const toggleMenuRef = useRef<HTMLInputElement>(null)
   return (
@@ -32,6 +33,9 @@ export default function Navbar() {
                 Products
               </Link>
             </Button>
+          </li>
+          <li className=''>
+            <CreateDialog />
           </li>
           <li className='max-sm:hidden sm:ml-auto'>
             <ModeToggle />

@@ -19,8 +19,8 @@ import { toast } from "sonner"
 const formSchema = z.object({
     title: z.string().min(2, {
         message: "Title must be at least 2 characters long",
-    }).max(50, {
-        message: "Title must be at most 50 characters long",
+    }).max(150, {
+        message: "Title must be at most 150 characters long",
     }),
     price: z
         .coerce.number(),
@@ -36,7 +36,6 @@ const formSchema = z.object({
     }),
 })
 export default function EditDialog({ product }: { product: ProductState | null | undefined }) {
-    console.log(product)
     const dispatch = useDispatch()
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -47,9 +46,6 @@ export default function EditDialog({ product }: { product: ProductState | null |
             category: product?.category || "",
         },
     })
-
-    console.log(form.watch('price'))
-    // 2. Define a submit handler.
     function onSubmit(values: z.infer<typeof formSchema>) {
         // ✅ This will be type-safe and validated.
         const req = fetch(`https://fakestoreapi.com/products/${product?.id}`, {

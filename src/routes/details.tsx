@@ -29,8 +29,8 @@ export default function Details() {
             throw new Error(error.message)
         throw new Error('Something went wrong in the server, please try again later.')
     }
-    if (!data) {
-        throw new Error('No data')
+    if (!data && !product) {
+        throw new Error('No product found.')
     }
     return (
         <>
@@ -38,14 +38,14 @@ export default function Details() {
                 <Card className="max-w-4xl mx-auto">
                     <CardHeader>
                         <h1 className="text-3xl font-bold text-center">
-                            {product?.title || data.title}
+                            {product?.title || data?.title}
                         </h1>
                     </CardHeader>
                     <CardContent className="">
-                        <img className="mx-auto" src={data.image} alt={data.title} />
+                        <img className="mx-auto" src={product?.image || data?.image} alt={product?.image || data?.title} />
                         <CardDescription className="pt-6">
                             {
-                                product?.description || data.description
+                                product?.description || data?.description
                             }
                         </CardDescription>
                     </CardContent>
@@ -53,22 +53,22 @@ export default function Details() {
                         <div className="w-full flex flex-row items-center gap-4 h-4">
                             <p className="font-bold">
                                 {
-                                    product?.category || data.category
+                                    product?.category || data?.category
                                 }
                             </p>
                             <Separator orientation="vertical" />
                             <p>
                                 {
-                                    product?.price || data.price
+                                    product?.price || data?.price
                                 }$
                             </p>
                             <Separator orientation="vertical" />
                             <p className="flex gap-2">
-                                {product?.rating.rate || data.rating.rate} <Star size={24} />
+                                {product?.rating.rate || data?.rating.rate} <Star size={24} />
                             </p>
                             <Separator orientation="vertical" />
                             <p className="flex gap-2">
-                                {product?.rating.count || data.rating.count} <Users size={24} />
+                                {product?.rating.count || data?.rating.count} <Users size={24} />
                             </p>
                             <Separator orientation="vertical" />
                         </div>

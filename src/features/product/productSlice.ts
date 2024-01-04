@@ -41,10 +41,18 @@ const productSlice = createSlice({
             if (index !== -1) {
                 state.splice(index, 1)
             }
+        },
+        addProduct: (state, action: {
+            payload: ProductState
+        }) => {
+            const newProduct = {
+                ...action.payload,
+            }
+            state.push(newProduct)
         }
     }
 })
 
-export const { setProducts, editProduct, deleteProduct } = productSlice.actions
+export const { setProducts, editProduct, deleteProduct, addProduct } = productSlice.actions
 export default productSlice.reducer
 
