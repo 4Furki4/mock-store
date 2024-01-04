@@ -75,8 +75,8 @@ export default function Details() {
                             <Separator className="sm:hidden" orientation="horizontal" />
                             <Separator className="hidden sm:block sm:h-8" orientation="vertical" />
                         </div>
-                        <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 max-sm:w-full">
-                            <EditDialog className="max-sm:w-full" product={product} />
+                        <div className="flex flex-col sm:flex-row gap-2 max-sm:w-full">
+                            <EditDialog className="max-sm:w-full hover:bg-primary hover:opacity-90" product={product} />
                             <DeleteDialog className="max-sm:w-full" productId={product?.id} />
                         </div>
                     </CardFooter>

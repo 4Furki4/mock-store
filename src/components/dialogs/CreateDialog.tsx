@@ -74,7 +74,7 @@ export default function CreateDialog({
                 <DialogHeader>
                     <DialogTitle>Create Product</DialogTitle>
                 </DialogHeader>
-                <DialogForm form={form} onSubmit={onSubmit} />
+                <DialogForm form={form} onSubmit={onSubmit} submitButtonText="Create" />
                 <DialogDescription>
                     a random image will be assigned to the product.
                 </DialogDescription>

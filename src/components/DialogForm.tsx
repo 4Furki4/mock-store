@@ -6,7 +6,8 @@ import { UseFormReturn } from "react-hook-form";
 import { Button } from "./ui/button";
 export default function DialogForm({
     form,
-    onSubmit
+    onSubmit,
+    submitButtonText
 }: {
     form: UseFormReturn<{
         title: string;
@@ -14,7 +15,8 @@ export default function DialogForm({
         description: string;
         category: string;
     }, any, undefined>,
-    onSubmit: (values: z.infer<typeof formSchema>) => void
+    onSubmit: (values: z.infer<typeof formSchema>) => void,
+    submitButtonText: string
 }) {
     return (
         <Form {...form}>
@@ -56,7 +58,7 @@ export default function DialogForm({
                     </FormItem>
                 )} />
                 <Button className="mt-4" type="submit" variant={'ghost'}>
-                    Create
+                    {submitButtonText}
                 </Button>
             </form>
         </Form>

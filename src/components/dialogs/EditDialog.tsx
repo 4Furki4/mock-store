@@ -54,7 +54,7 @@ export default function EditDialog({ product, className }: { product: ProductSta
     return (
         <Dialog>
             <DialogTrigger asChild className={className}>
-                <Button variant={'secondary'}>
+                <Button>
                     <Edit size={24} /> Edit
                 </Button>
             </DialogTrigger>
@@ -62,7 +62,7 @@ export default function EditDialog({ product, className }: { product: ProductSta
                 <DialogHeader>
                     <DialogTitle className="mb-4">Edit product</DialogTitle>
                     <div className="grid gap-4">
-                        <DialogForm form={form} onSubmit={onSubmit} />
+                        <DialogForm form={form} onSubmit={onSubmit} submitButtonText="Save" />
                     </div>
                 </DialogHeader>
             </DialogContent>

@@ -36,7 +36,7 @@ export default function DeleteDialog({ productId, className }: { productId: numb
     return (
         <Dialog>
             <DialogTrigger asChild className={className}>
-                <Button>
+                <Button variant={'destructive'}>
                     <Trash2 size={24} /> Delete
                 </Button>
             </DialogTrigger>
