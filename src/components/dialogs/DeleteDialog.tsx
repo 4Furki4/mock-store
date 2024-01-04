@@ -23,11 +23,9 @@ export default function DeleteDialog({ productId }: { productId: number | null |
         const req = fetch(`https://fakestoreapi.com/products/${productId}`, {
             method: 'DELETE',
         })
-        let response: Response | undefined;
         toast.promise(req, {
             loading: 'Deleting product...',
-            success: (data) => {
-                response = data
+            success: () => {
                 navigate('/products')
                 dispatch(deleteProduct(productId!))
                 return 'Product deleted successfully'
