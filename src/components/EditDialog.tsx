@@ -14,6 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form"
+import { toast } from "sonner"
 
 const formSchema = z.object({
     title: z.string().min(2, {
@@ -46,20 +47,32 @@ export default function EditDialog({ product }: { product: ProductState | null |
             category: product?.category || "",
         },
     })
+
     console.log(form.watch('price'))
     // 2. Define a submit handler.
     function onSubmit(values: z.infer<typeof formSchema>) {
         // ✅ This will be type-safe and validated.
-        const data: ProductState = {
-            ...values,
-            id: product?.id!,
-            image: product?.image || "",
-            rating: product?.rating || {
-                rate: 0,
-                count: 0,
-            }
-        }
-        dispatch(editProduct(data))
+        const req = fetch(`https://fakestoreapi.com/products/asdad`, {
+            method: 'PUT',
+            body: JSON.stringify(values)
+        })
+        toast.promise(req, {
+            loading: 'Updating product...',
+            success: () => {
+                const data: ProductState = {
+                    ...values,
+                    id: product?.id!,
+                    image: product?.image || "",
+                    rating: product?.rating || {
+                        rate: 0,
+                        count: 0,
+                    }
+                }
+                dispatch(editProduct(data))
+                return 'Product updated successfully'
+            },
+            error: 'Error updating product'
+        })
     }
     return (
         <Dialog>
