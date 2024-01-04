@@ -41,8 +41,8 @@ export default function Details() {
                             {product?.title || data?.title}
                         </h1>
                     </CardHeader>
-                    <CardContent className="">
-                        <img className="mx-auto" src={product?.image || data?.image} alt={product?.image || data?.title} />
+                    <CardContent>
+                        <img className="mx-auto max-h-[300px] min-h-[100px] sm:max-h-[400px] sm:min-h-[200px] object-contain" src={product?.image || data?.image} alt={product?.image || data?.title} />
                         <CardDescription className="pt-6">
                             {
                                 product?.description || data?.description
