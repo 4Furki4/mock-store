@@ -16,7 +16,7 @@ import { useCallback } from "react";
 import { deleteProduct } from "@/features/product/productSlice";
 import { useDispatch } from "react-redux";
 
-export default function DeleteDialog({ productId }: { productId: number | null | undefined }) {
+export default function DeleteDialog({ productId, className }: { productId: number | null | undefined, className?: string }) {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const onDeleteProduct = useCallback(async () => {
@@ -35,8 +35,10 @@ export default function DeleteDialog({ productId }: { productId: number | null |
     }, [productId])
     return (
         <Dialog>
-            <DialogTrigger className="flex gap-2 items-center ml-auto border-2 rounded-md p-2 bg-destructive hover:bg-foreground hover:text-destructive transition-color duration-75">
-                <Trash2 size={24} /> Delete
+            <DialogTrigger asChild className={className}>
+                <Button>
+                    <Trash2 size={24} /> Delete
+                </Button>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>

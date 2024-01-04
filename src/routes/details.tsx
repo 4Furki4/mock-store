@@ -49,31 +49,36 @@ export default function Details() {
                             }
                         </CardDescription>
                     </CardContent>
-                    <CardFooter className="grid-cols-2">
-                        <div className="w-full flex flex-row items-center gap-4 h-4">
+                    <CardFooter className="flex flex-col sm:flex-row gap-4">
+                        <div className="w-full flex flex-row flex-wrap sm:items-center gap-4">
                             <p className="font-bold">
                                 {
                                     product?.category || data?.category
                                 }
                             </p>
-                            <Separator orientation="vertical" />
+                            <Separator className="sm:hidden" orientation="horizontal" />
+                            <Separator className="hidden sm:block sm:h-8" orientation="vertical" />
                             <p>
-                                {
-                                    product?.price || data?.price
-                                }$
+                                {product?.price || data?.price}$
                             </p>
-                            <Separator orientation="vertical" />
-                            <p className="flex gap-2">
-                                {product?.rating.rate || data?.rating.rate} <Star size={24} />
-                            </p>
-                            <Separator orientation="vertical" />
-                            <p className="flex gap-2">
-                                {product?.rating.count || data?.rating.count} <Users size={24} />
-                            </p>
-                            <Separator orientation="vertical" />
+                            <Separator className="sm:hidden" orientation="horizontal" />
+                            <Separator className="hidden sm:block sm:h-8" orientation="vertical" />
+                            <div className="flex gap-4 items-center">
+                                <p className="flex gap-2">
+                                    {product?.rating.rate || data?.rating.rate} <Star size={24} />
+                                </p>
+                                <Separator className="h-8" orientation="vertical" />
+                                <p className="flex gap-2">
+                                    {product?.rating.count || data?.rating.count} <Users size={24} />
+                                </p>
+                            </div>
+                            <Separator className="sm:hidden" orientation="horizontal" />
+                            <Separator className="hidden sm:block sm:h-8" orientation="vertical" />
                         </div>
-                        <EditDialog product={product} />
-                        <DeleteDialog productId={product?.id} />
+                        <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 max-sm:w-full">
+                            <EditDialog className="max-sm:w-full" product={product} />
+                            <DeleteDialog className="max-sm:w-full" productId={product?.id} />
+                        </div>
                     </CardFooter>
                 </Card>
             </div >

@@ -14,8 +14,9 @@ import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { formSchema } from "@/lib/validationSchemas"
 import DialogForm from "../DialogForm"
+import { Button } from "../ui/button"
 
-export default function EditDialog({ product }: { product: ProductState | null | undefined }) {
+export default function EditDialog({ product, className }: { product: ProductState | null | undefined, className?: string }) {
     const dispatch = useDispatch()
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -52,8 +53,10 @@ export default function EditDialog({ product }: { product: ProductState | null |
     }
     return (
         <Dialog>
-            <DialogTrigger className="flex gap-2 items-center ml-auto border-2 rounded-md p-2 bg-primary hover:bg-foreground hover:text-primary transition-color duration-150">
-                <Edit size={24} /> Edit
+            <DialogTrigger asChild className={className}>
+                <Button variant={'secondary'}>
+                    <Edit size={24} /> Edit
+                </Button>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
