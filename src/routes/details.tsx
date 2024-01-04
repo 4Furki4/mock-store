@@ -12,19 +12,14 @@ import {
 } from "@/components/ui/dialog"
 import { useDispatch, useSelector } from "react-redux";
 import { useGetProductByIdQuery } from "@/services/product"
-import { Edit, Star, Trash2, Users } from "lucide-react";
-import React, { useEffect } from "react";
+import { Star, Trash2, Users } from "lucide-react";
+import { useEffect } from "react";
 import { useParams } from 'react-router-dom';
-import { editProduct, setProducts } from "@/features/product/productSlice";
+import { setProducts } from "@/features/product/productSlice";
 import { RootState } from "@/store";
-import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import EditDialog from "@/components/EditDialog";
 export default function Details() {
-    const titleInputRef = React.useRef<HTMLInputElement>(null)
-    const priceInputRef = React.useRef<HTMLInputElement>(null)
-    const descriptionInputRef = React.useRef<HTMLInputElement>(null)
-    const categoryInputRef = React.useRef<HTMLInputElement>(null)
     const { id } = useParams()
     const dispatch = useDispatch()
     const parsedId = parseInt(id!)
@@ -32,8 +27,6 @@ export default function Details() {
     const product = products.length > 0 ? products.find((product) => product.id === parsedId) : null
     const { data, error, isLoading } = useGetProductByIdQuery(parsedId)
     useEffect(() => {
-        console.log(products)
-        console.log(product)
         if (products.length === 0 && data) {
             dispatch(setProducts([data]))
         }

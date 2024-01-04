@@ -1,8 +1,6 @@
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
-    DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -15,7 +13,7 @@ import { Edit } from "lucide-react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "./ui/form"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form"
 
 const formSchema = z.object({
     title: z.string().min(2, {
@@ -74,7 +72,7 @@ export default function EditDialog({ product }: { product: ProductState | null |
                     <div className="grid gap-4">
                         <Form {...form}>
                             <form onSubmit={form.handleSubmit(onSubmit)}>
-                                <FormField control={form.control} name="title" render={({ field, fieldState: { error } }) => (
+                                <FormField control={form.control} name="title" render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Title</FormLabel>
                                         <FormControl>
@@ -83,7 +81,7 @@ export default function EditDialog({ product }: { product: ProductState | null |
                                         <FormMessage />
                                     </FormItem>
                                 )} />
-                                <FormField control={form.control} name="price" render={({ field, fieldState: { error } }) => (
+                                <FormField control={form.control} name="price" render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Price</FormLabel>
                                         <FormControl>
@@ -92,7 +90,7 @@ export default function EditDialog({ product }: { product: ProductState | null |
                                         <FormMessage />
                                     </FormItem>
                                 )} />
-                                <FormField control={form.control} name="description" render={({ field, fieldState: { error } }) => (
+                                <FormField control={form.control} name="description" render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Description</FormLabel>
                                         <FormControl>
@@ -101,7 +99,7 @@ export default function EditDialog({ product }: { product: ProductState | null |
                                         <FormMessage />
                                     </FormItem>
                                 )} />
-                                <FormField control={form.control} name="category" render={({ field, fieldState: { error } }) => (
+                                <FormField control={form.control} name="category" render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Category</FormLabel>
                                         <FormControl>
