@@ -25,10 +25,12 @@ export default function Details() {
         return <div>Loading...</div>
     }
     if (error) {
-        return <div>error...</div>
+        if (error instanceof Error)
+            throw new Error(error.message)
+        throw new Error('Something went wrong in the server, please try again later.')
     }
     if (!data) {
-        return <div>error...</div>
+        throw new Error('No data')
     }
     return (
         <>
