@@ -1,24 +1,14 @@
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "@/components/ui/card";
-import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog"
 import { useDispatch, useSelector } from "react-redux";
 import { useGetProductByIdQuery } from "@/services/product"
-import { Star, Trash2, Users } from "lucide-react";
+import { Star, Users } from "lucide-react";
 import { useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { setProducts } from "@/features/product/productSlice";
 import { RootState } from "@/store";
 import { Separator } from "@/components/ui/separator";
 import EditDialog from "@/components/EditDialog";
+import DeleteDialog from "@/components/DeleteDialog";
 export default function Details() {
     const { id } = useParams()
     const dispatch = useDispatch()
@@ -81,29 +71,7 @@ export default function Details() {
                             <Separator orientation="vertical" />
                         </div>
                         <EditDialog product={product} />
-                        <Dialog>
-                            <DialogTrigger className="flex gap-2 items-center ml-auto border-2 rounded-md p-2 bg-destructive hover:bg-foreground hover:text-destructive transition-color duration-75">
-                                <Trash2 size={24} /> Delete
-                            </DialogTrigger>
-                            <DialogContent>
-                                <DialogHeader>
-                                    <DialogTitle>Are you sure ?</DialogTitle>
-                                </DialogHeader>
-                                <DialogDescription>
-                                    This action is irreversible!
-                                </DialogDescription>
-                                <DialogFooter>
-                                    <Button variant={'destructive'}>
-                                        Delete
-                                    </Button>
-                                    <DialogClose asChild>
-                                        <Button variant={'secondary'}>
-                                            Cancel
-                                        </Button>
-                                    </DialogClose>
-                                </DialogFooter>
-                            </DialogContent>
-                        </Dialog>
+                        <DeleteDialog productId={product?.id} />
                     </CardFooter>
                 </Card>
             </div >
