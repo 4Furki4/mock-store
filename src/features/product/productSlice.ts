@@ -33,11 +33,18 @@ const productSlice = createSlice({
                 existingProduct.description = description
                 existingProduct.image = image
             }
+        },
+        deleteProduct: (state, action: {
+            payload: number
+        }) => {
+            const index = state.findIndex(product => product.id === action.payload)
+            if (index !== -1) {
+                state.splice(index, 1)
+            }
         }
     }
 })
 
-export const { setProducts, editProduct } = productSlice.actions
-
+export const { setProducts, editProduct, deleteProduct } = productSlice.actions
 export default productSlice.reducer
 
