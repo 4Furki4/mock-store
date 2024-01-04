@@ -34,8 +34,8 @@ export default function Navbar() {
               </Link>
             </Button>
           </li>
-          <li className=''>
-            <CreateDialog />
+          <li>
+            <CreateDialog className='max-sm:text-4xl' onClick={() => closeMenuOnClick(toggleMenuRef)} />
           </li>
           <li className='max-sm:hidden sm:ml-auto'>
             <ModeToggle />

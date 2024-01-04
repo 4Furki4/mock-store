@@ -20,7 +20,13 @@ import { useState } from "react";
 import { formSchema } from "@/lib/validationSchemas";
 import DialogForm from "../DialogForm";
 
-export default function CreateDialog() {
+export default function CreateDialog({
+    className,
+    onClick
+}: {
+    className?: string,
+    onClick?: () => void
+}) {
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch()
     const products = useSelector((state: RootState) => state.product);
@@ -61,7 +67,7 @@ export default function CreateDialog() {
     }
     return (
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger asChild>
+            <DialogTrigger className={className} onClick={onClick} asChild>
                 <Button variant={'link'}>Create Product</Button>
             </DialogTrigger>
             <DialogContent>
