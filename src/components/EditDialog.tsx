@@ -23,9 +23,8 @@ const formSchema = z.object({
     }).max(50, {
         message: "Title must be at most 50 characters long",
     }),
-    price: z.number().min(0, {
-        message: "Price must be at least 0",
-    }),
+    price: z
+        .coerce.number(),
     description: z.string().min(5, {
         message: "Description must be at least 2 characters long",
     }).max(1000, {
@@ -49,12 +48,20 @@ export default function EditDialog({ product }: { product: ProductState | null |
             category: product?.category || "",
         },
     })
-
+    console.log(form.watch('price'))
     // 2. Define a submit handler.
     function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
         // ✅ This will be type-safe and validated.
-        console.log(values)
+        const data: ProductState = {
+            ...values,
+            id: product?.id!,
+            image: product?.image || "",
+            rating: product?.rating || {
+                rate: 0,
+                count: 0,
+            }
+        }
+        dispatch(editProduct(data))
     }
     return (
         <Dialog>
@@ -80,7 +87,7 @@ export default function EditDialog({ product }: { product: ProductState | null |
                                     <FormItem>
                                         <FormLabel>Price</FormLabel>
                                         <FormControl>
-                                            <Input {...field} />
+                                            <Input {...field} type="number" step={0.01} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -108,18 +115,7 @@ export default function EditDialog({ product }: { product: ProductState | null |
                                 </Button>
                             </form>
                         </Form>
-                        {/* <Input required className="invalid:border-destructive invalid:focus:outline-destructive" placeholder="Product Title" type="text" value={product?.title} />
-                        <Input required className="invalid:border-destructive invalid:focus:outline-destructive" step={0.01} placeholder="Product Price" type="number" defaultValue={product?.price} min={0} />
-                        <Input required className="invalid:border-destructive invalid:focus:outline-destructive" placeholder="Product Description" type="text" defaultValue={product?.description} />
-                        <Input required className="invalid:border-destructive invalid:focus:outline-destructive" placeholder="Product Category" type="text" defaultValue={product?.category} /> */}
                     </div>
-                    <DialogFooter>
-                        {/* <Button variant={'secondary'} onClick={() => {
-                            // dispatch(editProduct({ ...data, title: titleInputRef.current?.value! }))
-                        }}>
-                            Save
-                        </Button> */}
-                    </DialogFooter>
                 </DialogHeader>
             </DialogContent>
         </Dialog>
