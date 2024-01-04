@@ -18,7 +18,7 @@ import { useForm } from "react-hook-form"
 import { RootState } from "@/store";
 import { useState } from "react";
 import { formSchema } from "@/lib/validationSchemas";
-import DialogForm from "../DialogForm";
+import DialogForm from "./DialogForm";
 
 export default function CreateDialog({
     className,
@@ -75,7 +75,7 @@ export default function CreateDialog({
                     <DialogTitle>Create Product</DialogTitle>
                 </DialogHeader>
                 <DialogForm form={form} onSubmit={onSubmit} submitButtonText="Create" />
-                <DialogFooter>
+                <DialogFooter className="sm:flex-col">
                     <DialogClose asChild>
                         <Button variant={'destructive'}>Cancel</Button>
                     </DialogClose>

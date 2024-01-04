@@ -14,7 +14,7 @@ import * as z from "zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { formSchema } from "@/lib/validationSchemas"
-import DialogForm from "../DialogForm"
+import DialogForm from "./DialogForm"
 import { Button } from "../ui/button"
 
 export default function EditDialog({ product, className }: { product: ProductState | null | undefined, className?: string }) {
