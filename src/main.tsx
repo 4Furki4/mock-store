@@ -13,6 +13,7 @@ import NotFound from './components/not-found.tsx';
 import { store } from './store.ts'
 import { Provider } from 'react-redux'
 import { Toaster } from 'sonner';
+import Home from './routes/home.tsx';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,11 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <NotFound />,
     children: [
+      {
+        path: "/",
+        element: <Home />,
+        errorElement: <NotFound />,
+      },
       {
         path: "/products",
         element: <Products />,
