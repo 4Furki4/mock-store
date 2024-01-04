@@ -1,5 +1,6 @@
 import {
     Dialog,
+    DialogClose,
     DialogContent,
     DialogHeader,
     DialogTitle,
@@ -60,11 +61,14 @@ export default function EditDialog({ product, className }: { product: ProductSta
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader className="text-left">
-                    <DialogTitle className="mb-4">Edit product</DialogTitle>
+                    <DialogTitle className="mb-4">Edit Product</DialogTitle>
                     <div className="grid gap-4">
                         <DialogForm form={form} onSubmit={onSubmit} submitButtonText="Save" />
                     </div>
                 </DialogHeader>
+                <DialogClose asChild>
+                    <Button variant={'destructive'}>Cancel</Button>
+                </DialogClose>
             </DialogContent>
         </Dialog>
     )

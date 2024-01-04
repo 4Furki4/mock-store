@@ -75,14 +75,14 @@ export default function CreateDialog({
                     <DialogTitle>Create Product</DialogTitle>
                 </DialogHeader>
                 <DialogForm form={form} onSubmit={onSubmit} submitButtonText="Create" />
-                <DialogDescription>
-                    a random image will be assigned to the product.
-                </DialogDescription>
                 <DialogFooter>
                     <DialogClose asChild>
-                        <Button variant={'ghost'}>Cancel</Button>
+                        <Button variant={'destructive'}>Cancel</Button>
                     </DialogClose>
                 </DialogFooter>
+                <DialogDescription>
+                    Note: a random image will be assigned to the product.
+                </DialogDescription>
             </DialogContent>
         </Dialog>
     )
