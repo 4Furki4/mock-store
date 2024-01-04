@@ -59,17 +59,17 @@ export default function Details() {
                             <Separator className="sm:hidden" orientation="horizontal" />
                             <Separator className="hidden sm:block sm:h-8" orientation="vertical" />
                             <p>
-                                {product?.price || data?.price}$
+                                {product?.price !== undefined ? product.price : data?.price}$
                             </p>
                             <Separator className="sm:hidden" orientation="horizontal" />
                             <Separator className="hidden sm:block sm:h-8" orientation="vertical" />
                             <div className="flex gap-4 items-center">
                                 <p className="flex gap-2">
-                                    {product?.rating.rate || data?.rating.rate} <Star size={24} />
+                                    {product?.rating.rate !== undefined ? product?.rating.rate : data?.rating.rate} <Star size={24} />
                                 </p>
                                 <Separator className="h-8" orientation="vertical" />
                                 <p className="flex gap-2">
-                                    {product?.rating.count || data?.rating.count} <Users size={24} />
+                                    {product?.rating.count !== undefined ? product?.rating.count : data?.rating.count} <Users size={24} />
                                 </p>
                             </div>
                             <Separator className="sm:hidden" orientation="horizontal" />

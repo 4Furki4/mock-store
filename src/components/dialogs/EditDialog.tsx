@@ -59,7 +59,7 @@ export default function EditDialog({ product, className }: { product: ProductSta
                 </Button>
             </DialogTrigger>
             <DialogContent>
-                <DialogHeader>
+                <DialogHeader className="text-left">
                     <DialogTitle className="mb-4">Edit product</DialogTitle>
                     <div className="grid gap-4">
                         <DialogForm form={form} onSubmit={onSubmit} submitButtonText="Save" />

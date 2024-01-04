@@ -20,44 +20,40 @@ export default function DialogForm({
 }) {
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-8">
                 <FormField control={form.control} name="title" render={({ field }) => (
-                    <FormItem>
-                        <FormLabel>Title</FormLabel>
+                    <FormItem className="space-y-0">
                         <FormControl>
-                            <Input  {...field} />
+                            <Input placeholder="Title"  {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
                 )} />
                 <FormField control={form.control} name="price" render={({ field }) => (
-                    <FormItem>
-                        <FormLabel>Price</FormLabel>
+                    <FormItem className="space-y-0">
                         <FormControl>
-                            <Input {...field} type="number" step={0.01} />
+                            <Input placeholder="Price" {...field} type="number" step={0.01} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
                 )} />
                 <FormField control={form.control} name="description" render={({ field }) => (
-                    <FormItem>
-                        <FormLabel>Description</FormLabel>
+                    <FormItem className="space-y-0">
                         <FormControl>
-                            <Input  {...field} />
+                            <Input placeholder="Description"  {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
                 )} />
                 <FormField control={form.control} name="category" render={({ field }) => (
-                    <FormItem>
-                        <FormLabel>Category</FormLabel>
+                    <FormItem className="space-y-0">
                         <FormControl>
-                            <Input {...field} />
+                            <Input placeholder="Category" {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
                 )} />
-                <Button className="mt-4" type="submit" variant={'ghost'}>
+                <Button className="mt-4 bg-primary hover:bg-primary hover:opacity-90" type="submit" variant={'outline'}>
                     {submitButtonText}
                 </Button>
             </form>
