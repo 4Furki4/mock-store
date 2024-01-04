@@ -9,6 +9,7 @@ import { RootState } from "@/store";
 import { Separator } from "@/components/ui/separator";
 import EditDialog from "@/components/dialogs/EditDialog";
 import DeleteDialog from "@/components/dialogs/DeleteDialog";
+import Spinner from "@/components/ui/spinner";
 export default function Details() {
     const { id } = useParams()
     const dispatch = useDispatch()
@@ -22,7 +23,7 @@ export default function Details() {
         }
     }, [data, products])
     if (isLoading) {
-        return <div>Loading...</div>
+        return <Spinner className='absolute inset-0 m-auto' />
     }
     if (error) {
         if (error instanceof Error)
@@ -30,7 +31,7 @@ export default function Details() {
         throw new Error('Something went wrong in the server, please try again later.')
     }
     if (!data && !product) {
-        throw new Error('No product found.')
+        throw new Error('Product not found. Added products are not persisted in the server')
     }
     return (
         <>

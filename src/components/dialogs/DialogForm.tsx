@@ -1,9 +1,9 @@
 import { formSchema } from "@/lib/validationSchemas";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form"
-import { Input } from "./ui/input";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "../ui/form"
+import { Input } from "../ui/input";
 import { z } from "zod";
 import { UseFormReturn } from "react-hook-form";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 export default function DialogForm({
     form,
     onSubmit,
