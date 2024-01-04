@@ -7,8 +7,8 @@ import { useParams } from 'react-router-dom';
 import { setProducts } from "@/features/product/productSlice";
 import { RootState } from "@/store";
 import { Separator } from "@/components/ui/separator";
-import EditDialog from "@/components/EditDialog";
-import DeleteDialog from "@/components/DeleteDialog";
+import EditDialog from "@/components/dialogs/EditDialog";
+import DeleteDialog from "@/components/dialogs/DeleteDialog";
 export default function Details() {
     const { id } = useParams()
     const dispatch = useDispatch()

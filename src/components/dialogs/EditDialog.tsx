@@ -13,7 +13,7 @@ import { Edit } from "lucide-react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { toast } from "sonner"
 
 const formSchema = z.object({
@@ -52,7 +52,7 @@ export default function EditDialog({ product }: { product: ProductState | null |
     // 2. Define a submit handler.
     function onSubmit(values: z.infer<typeof formSchema>) {
         // ✅ This will be type-safe and validated.
-        const req = fetch(`https://fakestoreapi.com/products/asdad`, {
+        const req = fetch(`https://fakestoreapi.com/products/${product?.id}`, {
             method: 'PUT',
             body: JSON.stringify(values)
         })
