@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
 
 @layer base {
   :root {
@@ -50,7 +49,6 @@
   }
 }
 
- 
 @layer base {
   * {
     @apply border-border;
@@ -59,6 +57,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+html {
+  scrollbar-gutter: property; /* Safari Support of scrollbar-gutter stable, see https://caniuse.com/?search=scrollbar-gutter */
+  scrollbar-gutter: stable;
+}
+
+
 @media screen and (max-width: 640px) {
   #menuToggle
   {
@@ -89,7 +94,7 @@
   }
   
   /*
-   * Just a quick hamburger
+   * hamburger
    */
   #menuToggle span
   {
@@ -132,7 +137,7 @@
   }
   
   /*
-   * But let's hide the middle one.
+   * hide the middle one.
    */
   #menuToggle input:checked ~ span:nth-last-child(2)
   {
@@ -141,7 +146,7 @@
   }
   
   /*
-   * Ohyeah and the last one should go the other direction
+   * the last one should go the other direction
    */
   #menuToggle input:checked ~ span:nth-last-child(3)
   {

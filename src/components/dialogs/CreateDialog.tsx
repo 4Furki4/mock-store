@@ -10,9 +10,6 @@ import {
 } from "@/components/ui/dialog"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button";
-import { Trash2 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { useCallback } from "react";
 import { ProductState, addProduct, deleteProduct } from "@/features/product/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -21,6 +18,7 @@ import { useForm } from "react-hook-form"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { Input } from "../ui/input";
 import { RootState } from "@/store";
+import { useState } from "react";
 
 type ProductPostRes = Omit<ProductState, 'rating'>
 
@@ -31,7 +29,9 @@ const formSchema = z.object({
         message: "Title must be at most 150 characters long",
     }),
     price: z
-        .coerce.number(),
+        .coerce.number().min(0, {
+            message: "Price must be at least 0",
+        }),
     description: z.string().min(5, {
         message: "Description must be at least 2 characters long",
     }).max(1000, {
@@ -44,6 +44,7 @@ const formSchema = z.object({
     }),
 })
 export default function CreateDialog() {
+    const [open, setOpen] = useState(false)
     const dispatch = useDispatch()
     const products = useSelector((state: RootState) => state.product);
     const form = useForm<z.infer<typeof formSchema>>({
@@ -63,19 +64,18 @@ export default function CreateDialog() {
         })
         toast.promise(req, {
             loading: 'Creating product...',
-            success: (res) => {
-                res.json().then((data: { id: number }) => {
-                    const createdProduct = {
-                        ...values,
-                        id: products.length + 1,
-                        rating: {
-                            count: 0,
-                            rate: 0,
-                        },
-                        image: 'https://picsum.photos/400/600'
-                    }
-                    dispatch(addProduct(createdProduct))
-                })
+            success: () => {
+                const createdProduct = {
+                    ...values,
+                    id: products.length + 1,
+                    rating: {
+                        count: 0,
+                        rate: 0,
+                    },
+                    image: 'https://picsum.photos/400/600'
+                }
+                dispatch(addProduct(createdProduct))
+                setOpen(false)
                 return 'Product created'
             },
             error: 'Error creating product'
@@ -83,11 +83,14 @@ export default function CreateDialog() {
             form.reset()
     }
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger>
                 Create Product
             </DialogTrigger>
             <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>Create Product</DialogTitle>
+                </DialogHeader>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
                         <FormField control={form.control} name="title" render={({ field }) => (
@@ -131,6 +134,14 @@ export default function CreateDialog() {
                         </Button>
                     </form>
                 </Form>
+                <DialogDescription>
+                    a random image will be assigned to the product.
+                </DialogDescription>
+                <DialogFooter>
+                    <DialogClose asChild>
+                        <Button variant={'ghost'}>Cancel</Button>
+                    </DialogClose>
+                </DialogFooter>
             </DialogContent>
         </Dialog>
     )
