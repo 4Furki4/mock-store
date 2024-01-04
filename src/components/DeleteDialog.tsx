@@ -8,6 +8,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
+import { toast } from "sonner"
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -19,14 +20,20 @@ export default function DeleteDialog({ productId }: { productId: number | null |
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const onDeleteProduct = useCallback(async () => {
-        const response = await fetch(`https://fakestoreapi.com/products/${productId}`, {
+        const req = fetch(`https://fakestoreapi.com/products/${productId}`, {
             method: 'DELETE',
         })
-        if (response.ok) {
-            navigate('/products')
-            dispatch(deleteProduct(productId!))
-            return
-        }
+        let response: Response | undefined;
+        toast.promise(req, {
+            loading: 'Deleting product...',
+            success: (data) => {
+                response = data
+                navigate('/products')
+                dispatch(deleteProduct(productId!))
+                return 'Product deleted successfully'
+            },
+            error: 'Error deleting product'
+        })
     }, [productId])
     return (
         <Dialog>

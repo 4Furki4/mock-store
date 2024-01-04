@@ -12,6 +12,7 @@ import Details from './routes/details.tsx';
 import NotFound from './components/not-found.tsx';
 import { store } from './store.ts'
 import { Provider } from 'react-redux'
+import { Toaster } from 'sonner';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <Provider store={store}>
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <RouterProvider router={router} />
+        <Toaster richColors closeButton />
       </ThemeProvider>
     </Provider>
   </React.StrictMode>,
