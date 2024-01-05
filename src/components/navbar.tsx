@@ -14,6 +14,7 @@ export default function Navbar() {
         <span></span>
         <span></span>
       </div>
+      <CreateDialog className='sm:hidden ml-auto' onClick={() => closeMenuOnClick(toggleMenuRef)} />
       <ModeToggle className='sm:hidden ml-auto' />
       <nav className='max-sm:absolute max-sm:bg-background max-sm:hidden max-sm:min-h-0 top-[60px] left-0 w-full z-40 peer-has-[:checked]:max-sm:min-h-[calc(100vh-60px)] peer-has-[:checked]:flex peer-has-[:checked]:flex-col peer-has-[:checked]:gap-16 transition-[all] duration-300'>
         <ul className='flex flex-col sm:flex-row max-sm:justify-center sm:items-center gap-4 sm:gap-0 max-sm:p-4'>
@@ -35,7 +36,7 @@ export default function Navbar() {
             </Button>
           </li>
           <li>
-            <CreateDialog className='max-sm:text-4xl' onClick={() => closeMenuOnClick(toggleMenuRef)} />
+            <CreateDialog className='hidden sm:block max-sm:text-4xl' onClick={() => closeMenuOnClick(toggleMenuRef)} />
           </li>
           <li className='max-sm:hidden sm:ml-auto'>
             <ModeToggle />

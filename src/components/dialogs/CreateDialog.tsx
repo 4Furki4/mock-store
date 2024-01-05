@@ -19,6 +19,7 @@ import { RootState } from "@/store";
 import { useState } from "react";
 import { formSchema } from "@/lib/validationSchemas";
 import DialogForm from "./DialogForm";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateDialog({
     className,
@@ -27,6 +28,7 @@ export default function CreateDialog({
     className?: string,
     onClick?: () => void
 }) {
+    const navigate = useNavigate()
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch()
     const products = useSelector((state: RootState) => state.product);
@@ -59,6 +61,7 @@ export default function CreateDialog({
                 }
                 dispatch(addProduct(createdProduct))
                 setOpen(false)
+                navigate(`/products/${createdProduct.id}`)
                 return 'Product created'
             },
             error: 'Error creating product'
